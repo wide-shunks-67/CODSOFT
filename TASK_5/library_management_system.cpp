@@ -18,7 +18,7 @@ struct Borrower{
     string name;
     vector<BorrowedBook>borrowed_books;
 };
-//get current time
+//get current date
 string get_current_date(){
     time_t now=time(0);
     tm* local=localtime(&now);
@@ -26,8 +26,8 @@ string get_current_date(){
     oss<< put_time(local, "%Y-%m-%d");
     return oss.str();
 }
-//14 days time
-string get_time_14_days_later(){
+//date afte 14 days
+string get_date_14_days_later(){
     time_t now = time(0);
     now+=14 * 24 *60 * 60;
 
@@ -175,7 +175,7 @@ void issue_book(vector<Book>&library, vector<Borrower>&borrowers){
                 //borrower exist
                 BorrowedBook borrowed;
                 borrowed.isbn=book.ISBN;
-                borrowed.due_date = get_time_14_days_later();
+                borrowed.due_date = get_date_14_days_later();
                 it->borrowed_books.push_back(borrowed);
                 book.is_issued=true;
                 cout<<"\nBook successfull issued to "<<it->name<< " with ID: "<<it->ID<<" .\n";
@@ -185,7 +185,7 @@ void issue_book(vector<Book>&library, vector<Borrower>&borrowers){
                 //new borrower
             BorrowedBook borrowed;
             borrowed.isbn=book.ISBN;
-            borrowed.due_date = get_time_14_days_later();
+            borrowed.due_date = get_date_14_days_later();
             b.borrowed_books.push_back(borrowed);
             book.is_issued=true;
             cout<<"\nBook successfull issued to "<<b.name<< " with ID: "<<b.ID<<" .\n";
